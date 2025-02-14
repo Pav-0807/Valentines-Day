@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        body {
+            font-family: 'Arial, sans-serif';
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 15vh;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .heart-button, .no-button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .no-button {
+            background-color: #333;
+            margin-left: 20px;
+        }
+        .heart-button:hover {
+            background-color: #ff1e44;
+        }
+        .no-button:hover {
+            background-color: #555;
+        }
+        .hidden {
+            display: none;
+        }
+        .sticker {
+            width: 200px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="love_me_like_you_do_instrumental.mp3" type="audio/mp3">
+    </audio>
+    <div class="container">
+        <h1>Will You Be My Valentine, Janani?</h1>
+        <button id="yes-button" class="heart-button" onclick="nextPage()">Yes 💖</button>
+        <button id="no-button" class="no-button" onclick="noClicked()">No 😜</button>
+        <div id="retry-container" class="hidden">
+            <img src="playful_sticker.png" alt="Playful Sticker" class="sticker">
+            <br>
+            <button class="heart-button" onclick="retry()">Retry 😒</button>
+        </div>
+    </div>
+
+    <script>
+        let noCount = 0;
+        let yesButton = document.getElementById("yes-button");
+        let noButton = document.getElementById("no-button");
+        let retryContainer = document.getElementById("retry-container");
+
+        function nextPage() {
+            window.location.href = "date.html";
+        }
+
+        function noClicked() {
+            noCount++;
+            yesButton.style.fontSize = (1.5 + noCount * 0.2) + "em";
+            if (noCount >= 10) {
+                noButton.style.display = "none";
+                yesButton.style.display = "none";
+                retryContainer.classList.remove("hidden");
+            }
+        }
+
+        function retry() {
+            window.location.href = "index.html";
+        }
+
+        window.onload = function() {
+            let audio = document.getElementById("bg-music");
+            audio.play().catch(error => console.log("Autoplay blocked: " + error));
+        }
+    </script>
+</body>
+</html>
